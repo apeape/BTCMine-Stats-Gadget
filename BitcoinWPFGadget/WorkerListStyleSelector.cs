@@ -23,9 +23,9 @@ namespace BitcoinWPFGadget
 
             int index = listView.ItemContainerGenerator.IndexFromContainer(container);
 
-            BTCGuild.Worker worker = (listView.Items[index] as BTCGuild.Worker);
+            BTCMine.Miner worker = (listView.Items[index] as BTCMine.Miner);
 
-            backGroundSetter.Value = worker.statusColor;
+            backGroundSetter.Value = worker.onlineStatusColor;
 
             st.Setters.Add(backGroundSetter);
 

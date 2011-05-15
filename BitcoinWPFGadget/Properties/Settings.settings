@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="BitcoinWPFGadget.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="btcguild_apikey" Type="System.String" Scope="User">
+    <Setting Name="apikey" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

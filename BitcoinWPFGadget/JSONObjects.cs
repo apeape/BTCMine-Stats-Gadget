@@ -9,6 +9,96 @@ using System.Windows.Media;
 
 namespace BitcoinWPFGadget
 {
+    public class BTCMine
+    {
+        public static BTCMine.Pool GetPoolStats(string apikey)
+        {
+            return Utility.Deserialize<BTCMine.Pool>("http://btcmine.com/api/getpoolstats/" + apikey);
+        }
+
+        public static BTCMine.UserBalance GetUserBalance(string apikey)
+        {
+            return Utility.Deserialize<BTCMine.UserBalance>("http://btcmine.com/api/getbalance/" + apikey);
+        }
+
+        public static BTCMine.UserStats GetUserStats(string apikey)
+        {
+            return Utility.Deserialize<BTCMine.UserStats>("http://btcmine.com/api/getstats/" + apikey);
+        }
+
+        public static BTCMine.MinerStats GetMinerStats(string apikey)
+        {
+            return Utility.Deserialize<BTCMine.MinerStats>("http://btcmine.com/api/getminerstats/" + apikey);
+        }
+
+        public class Pool
+        {
+            public UInt64 getworks { get; set; }
+            public UInt64 round_shares { get; set; }
+            public UInt64 miners { get; set; }
+            public TimeSpan round_duration { get; set; }
+            public UInt64 block { get; set; }
+            public DateTime round_started { get; set; }
+            public double hashrate { get; set; }
+
+            public string getworks_stats { get { return getworks + " GW/s"; } }
+            public string hashrate_stats { get { return (hashrate / 1000f).ToString("0.00") + " gH/s"; } }
+        }
+
+        public class UserBalance
+        {
+            public double confirmed { get; set; }
+            public double unconfirmed { get; set; }
+
+            public string confirmed_stats { get { return confirmed.ToString("0.00") + " BTC"; } }
+            public string unconfirmed_stats { get { return unconfirmed.ToString("0.00") + " BTC"; } }
+        }
+
+        public class UserStats
+        {
+            public double total_bounty { get; set; }
+            public double confirmed_bounty { get; set; }
+            public UInt64 solved_blocks { get; set; }
+            public UInt64 round_shares { get; set; }
+            public double estimated_bounty { get; set; }
+            public UInt64 solved_shares { get; set; }
+            public double unconfirmed_bounty { get; set; }
+            public double hashrate { get; set; }
+            public bool online_status { get; set; }
+            public double total_payout { get; set; }
+
+            public string total_bounty_stats { get { return total_bounty.ToString("0.00") + " BTC"; } }
+            public string confirmed_bounty_stats { get { return confirmed_bounty.ToString("0.00") + " BTC"; } }
+            public string estimated_bounty_stats { get { return estimated_bounty.ToString("0.00") + " BTC"; } }
+            public string unconfirmed_bounty_stats { get { return unconfirmed_bounty.ToString("0.00") + " BTC"; } }
+            public string total_payout_stats { get { return total_payout.ToString("0.00") + " BTC"; } }
+            public string hashrate_stats { get { return hashrate + " mH/s"; } }
+            public string online_status_stats { get { return online_status ? "Online" : "Offline"; } }
+
+            public double btc_per_day { get; set; }
+            public string btc_per_day_stats { get { return btc_per_day.ToString("0.00") + " BTC"; } }
+            public double btc_per_hour { get; set; }
+            public string btc_per_hour_stats { get { return btc_per_hour.ToString("0.00") + " BTC"; } }
+        }
+
+        public class MinerStats
+        {
+            public List<Miner> miners { get; set; }
+        }
+
+        public class Miner
+        {
+            public string name { get; set; }
+            public DateTime date_connected { get; set; }
+            public bool online_status { get; set; }
+            public UInt64 solved_shares { get; set; }
+            public UInt64 solved_blocks { get; set; }
+
+            public string online_status_stats { get { return online_status ? "Online" : "Offline"; } }
+            public SolidColorBrush onlineStatusColor { get { return online_status ? Brushes.LightGreen : Brushes.LightPink; } }
+        }
+    }
+
     public class BTCGuild
     {
         public static BTCGuild.Stats GetStats(string apikey)
