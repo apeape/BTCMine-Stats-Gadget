@@ -2,7 +2,7 @@
 <gadget>
   <name>BTCMine Stats</name>
   <namespace>ape</namespace>
-  <version>1.0</version>
+  <version>1.1</version>
   <author name="ape">
     <info url="mailto://sapien@gmail.com" text="Email ape" />
     <logo src="BC_Logo_.png" />

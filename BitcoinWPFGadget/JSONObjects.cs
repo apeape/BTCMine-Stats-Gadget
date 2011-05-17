@@ -9,6 +9,27 @@ using System.Windows.Media;
 
 namespace BitcoinWPFGadget
 {
+    public class MtGox
+    {
+        public static MtGox.TickerData GetTickerData()
+        {
+            return Utility.Deserialize<MtGox.Ticker>("https://mtgox.com/code/data/ticker.php").ticker;
+        }
+
+        public class Ticker
+        {
+            public TickerData ticker { get; set; }
+        }
+        public class TickerData
+        {
+            public decimal high { get; set; }
+            public decimal low { get; set; }
+            public double vol { get; set; }
+            public decimal buy { get; set; }
+            public decimal sell { get; set; }
+            public decimal last { get; set; }
+        }
+    }
     public class BTCMine
     {
         public static BTCMine.Pool GetPoolStats(string apikey)
@@ -79,6 +100,7 @@ namespace BitcoinWPFGadget
             public string btc_per_day_stats { get { return btc_per_day.ToString("0.00") + " BTC"; } }
             public double btc_per_hour { get; set; }
             public string btc_per_hour_stats { get { return btc_per_hour.ToString("0.00") + " BTC"; } }
+            public string usd_per_day_stats { get; set; }
         }
 
         public class MinerStats

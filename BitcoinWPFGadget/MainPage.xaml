@@ -12,9 +12,10 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition />
+            <RowDefinition Height="20"/>
             <RowDefinition Height="32"/>
         </Grid.RowDefinitions>
-        <TabControl TabStripPlacement="Bottom" Margin="6,0,6,-27" BorderBrush="{x:Null}" Background="{x:Null}">
+        <TabControl Grid.Row="0" TabStripPlacement="Bottom" Margin="6,0,6,-32" BorderBrush="{x:Null}" Background="{x:Null}">
             <TabItem Header="Stats">
                 <Grid Margin="-12, -6, -12, 0" Background="{x:Null}">
                     <Grid.RowDefinitions>
@@ -67,6 +68,7 @@
                                 <GridViewColumn Header="Est Total Speed" DisplayMemberBinding="{Binding hashrate_stats}" />
                                 <GridViewColumn Header="Est BTC/Day" DisplayMemberBinding="{Binding btc_per_day_stats}" />
                                 <GridViewColumn Header="Est BTC/Hour" DisplayMemberBinding="{Binding btc_per_hour_stats}" />
+                                <GridViewColumn Header="Est USD/Day" DisplayMemberBinding="{Binding usd_per_day_stats}" />
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -90,12 +92,20 @@
                 </Grid>
             </TabItem>
         </TabControl>
-        <TextBlock Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,1,0" Padding="6">
-            <TextBlock >
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="100,0,0,-6" Padding="6">    
+            <TextBlock Margin="0,1,0,0">
+                <TextBlock Foreground="LightYellow">MtGoxUSD:</TextBlock>
+                <TextBlock Foreground="LightGreen" Name="usd">$0.00</TextBlock>
+            </TextBlock>
+
+            <Path Name="UpArrow" Visibility="Hidden" Fill="#FF83FF62" Data="M 0 6 L 12 6 L 6 0 Z" Margin="0,0,0,0"/>
+            <Path Name="DownArrow" Visibility="Hidden" Fill="Red" Data="M 0 0 L 6 6 L 12 0 Z" Margin="-15,0,0,0" />
+        </TextBlock>
+
+        <TextBlock Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0" Padding="6">
             <TextBlock Foreground="LightYellow" Margin="100,-6,2,0">donations? :)</TextBlock>
             <TextBox IsReadOnly="True" TextAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Center" Name="Donations" Margin="0,0,0,0" ToolTip="Donations appreciated &lt;3" FontSize="10" MouseDown="Donations_MouseDown" Background="#FFE9E9E9">1JAvRGSC1b7KfnEgxob7YrMDJMJ6syUg24</TextBox>
         </TextBlock>
-    </TextBlock>
     </Grid>
 
     <Page.Background>

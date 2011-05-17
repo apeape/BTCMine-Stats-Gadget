@@ -36,6 +36,7 @@ namespace BitcoinWPFGadget
         string apiKey = String.Empty;
         BTCGuild.Stats stats = default(BTCGuild.Stats);
         double currentDifficulty;
+        MtGox.TickerData ticker = default(MtGox.TickerData);
 
         public static TimeSpan yellowIdleThreshold;
         public static TimeSpan redIdleThreshold;
@@ -89,22 +90,13 @@ namespace BitcoinWPFGadget
                 // grab current difficulty
                 currentDifficulty = Utility.Deserialize<double>("http://blockexplorer.com/q/getdifficulty");
 
+                // grab current mtgox ticker
+                ticker = MtGox.GetTickerData();
+
                 UpdateGUI(() =>
                 {
                     try
                     {
-                        // bind user stats
-                        this.UserStats.Clear();
-                        this.UserStats.Add(userstats);
-
-                        // bind pool stats
-                        this.PoolStats.Clear();
-                        this.PoolStats.Add(poolstats);
-
-                        // bind worker stats
-                        this.MinerStats.Clear();
-                        minerstats.miners.ForEach(miner => this.MinerStats.Add(miner));
-
                         if (currentDifficulty == default(double))
                         {
                             // failed to retrieve difficulty, btc per day calculation not possible
@@ -118,6 +110,31 @@ namespace BitcoinWPFGadget
                             userstats.btc_per_day = 50 * TimeSpan.FromDays(1).TotalSeconds / (1 / (Math.Pow(2, 224) - 1)) / currentDifficulty * userstats.hashrate * 1000000 / Math.Pow(2, 256);
                             userstats.btc_per_hour = userstats.btc_per_day / 24f;
                         }
+                        // update mtgox exchange rate
+                        if (ticker == default(MtGox.TickerData))
+                        {
+                            // failed to retrieve mtgox data, leave current value
+                        }
+                        else
+                        {
+                            this.usd.Text = ticker.buy.ToString("C");
+                            this.UpArrow.Visibility = this.ticker.buy > this.ticker.last ? Visibility.Visible : Visibility.Hidden;
+                            this.DownArrow.Visibility = this.ticker.buy < this.ticker.last ? Visibility.Visible : Visibility.Hidden;
+                            this.usd.Foreground = this.ticker.buy >= this.ticker.last ? Brushes.LightGreen : Brushes.LightPink;
+                            userstats.usd_per_day_stats = ((decimal)userstats.btc_per_day * ticker.buy).ToString("C");
+                        }
+
+                        // bind user stats
+                        this.UserStats.Clear();
+                        this.UserStats.Add(userstats);
+
+                        // bind pool stats
+                        this.PoolStats.Clear();
+                        this.PoolStats.Add(poolstats);
+
+                        // bind worker stats
+                        this.MinerStats.Clear();
+                        minerstats.miners.ForEach(miner => this.MinerStats.Add(miner));
 
                         this.test.Text = "BTCMine Stats"; // reset error
                     }
