@@ -15,6 +15,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Globalization;
+//using Microsoft.Windows.Controls;
 
 namespace BitcoinWPFGadget
 {
