@@ -87,7 +87,7 @@
                 </Grid>
             </TabItem>-->
         </TabControl>
-        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="50,0,0,-6" Padding="6">    
+        <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="80,0,0,-6" Padding="6">    
             <TextBlock Margin="0,1,0,0">
                 <TextBlock Foreground="LightYellow">MtGoxUSD:</TextBlock>
                 <TextBlock Foreground="LightGreen" Name="usd">$0.00</TextBlock>
@@ -97,8 +97,8 @@
             <Path Name="DownArrow" Visibility="Hidden" Fill="Red" Data="M 0 0 L 6 6 L 12 0 Z" Margin="-15,0,0,0" />
         </TextBlock>
         <TextBlock HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Row="1" Padding="6" Width="60" Margin="0,0,0,0">
-            <Image Name="clock" Margin="0,-7,0,-3" Stretch="None" Source="/BitcoinWPFGadget;component/Rtime.png" />
-            <TextBlock Margin="0,2,0,-8" Foreground="LightYellow" Name="Countdown" ToolTip="Time until next data update">00:00</TextBlock>
+            <Image Name="clock" Margin="0,-7,0,-4" Stretch="None" Source="/BitcoinWPFGadget;component/Rtime.png" />
+            <TextBlock Margin="0,3,0,-8" Foreground="LightYellow" Name="Countdown" ToolTip="Time until next data update">00:00</TextBlock>
         </TextBlock>
 
         <TextBlock Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,0,0" Padding="6">
